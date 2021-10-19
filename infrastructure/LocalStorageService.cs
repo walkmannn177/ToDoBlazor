@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 namespace toDo.infrastructure
 {
 
-    public class LocalStorageService : ILocalStorageService
+    public class LocalStorageService : IALocalStorageService
 {
     private readonly IJSRuntime _jsRuntime;
 

@@ -9,7 +9,7 @@ namespace toDo
 {
     public partial class LoginModel: ComponentBase
     {
-        [Inject] public ILocalStorageService LocalStorageService {get; set;}
+        [Inject] public IALocalStorageService LocalStorageService {get; set;}
         [Inject] public NavigationManager NavigationManager {get; set;}
         public LoginModel()
         {

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 using toDo.infrastructure;
+using Blazored.LocalStorage;
 using static toDo.LoginModel;
 
 namespace toDo
@@ -19,8 +20,9 @@ namespace toDo
             builder.RootComponents.Add<App>("#app");
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
+            builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<AuthenticationStateProvider, TokenAuthenticationStateProvider>();
-            builder.Services.AddScoped<ILocalStorageService,LocalStorageService>();
+            builder.Services.AddScoped<IALocalStorageService,LocalStorageService>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();
@@ -29,9 +31,9 @@ namespace toDo
 
     public class TokenAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private readonly ILocalStorageService _localStorageService;
+        private readonly IALocalStorageService _localStorageService;
 
-        public TokenAuthenticationStateProvider(ILocalStorageService localStorageService)
+        public TokenAuthenticationStateProvider(IALocalStorageService localStorageService)
         {
             _localStorageService = localStorageService;
         }

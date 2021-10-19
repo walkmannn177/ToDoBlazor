@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace toDo.infrastructure
 {
-    public interface ILocalStorageService
+    public interface IALocalStorageService
 {
     Task SetAsync<T>(string key, T item)  where T: class;
 
