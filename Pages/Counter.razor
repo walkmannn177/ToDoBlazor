@@ -1,0 +1,26 @@
+@page "/counter"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject AuthenticationStateProvider Provider
+<p>
+@if(!string.IsNullOrWhiteSpace(UserName))
+{
+    <span>@UserName</span>
+}
+</p>
+
+@code {
+    private int currentCount = 0;
+    private string UserName = "Anonymouse";
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+     protected override async Task OnInitializedAsync()
+    {
+        var state = await Provider.GetAuthenticationStateAsync();
+        UserName = state?.User?.Identity?.Name ?? "Sorry";
+        
+    }
+}
